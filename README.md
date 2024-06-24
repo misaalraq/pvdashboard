@@ -18,6 +18,3 @@ Register Here : [Pixelverse](https://dashboard.pixelverse.xyz/?ref=uccauuauan&v=
 - Auto Cek Profile
 - Multi Account
 
-## Get this tool
-
-![SS](https://i.ibb.co.com/DLs3Yth/Cuplikan-layar-2024-06-24-111851.png)
