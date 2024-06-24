@@ -21,7 +21,7 @@ def get_user_info(init_data_line):
     
     response = requests.get(url, headers=headers)
     data = response.json()
-    
+    # print(data)
     email = data.get('email', 'No email provided')
     username = data['profile']['username']
     balance = data['spendablePoints']['amount']
