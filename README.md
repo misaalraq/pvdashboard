@@ -8,7 +8,7 @@ Register Here : [Pixelverse](https://dashboard.pixelverse.xyz/?ref=uccauuauan&v=
 ## Install
 - Download Python
 - Install module colorama requests
-- Ambil authorization token [CEK SS](https://ibb.co.com/ZK452P1)
+- Ambil authorization token [CEK SS](https://imgbb.com/ZK452P1)
 
 ## Features
 
