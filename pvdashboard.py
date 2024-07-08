@@ -155,3 +155,38 @@ def select_pet(pet_id, init_data_line):
     else:
         print(f"{Fore.RED}Gagal memilih hewan peliharaan {pet_id}. Error: {response.json()}{Style.RESET_ALL}")
 
+def daily_check_in(init_data_line):
+    url = 'https://api.pixelverse.xyz/api/daily-reward/complete'
+    headers = {
+        'accept': 'application/json, text/plain, */*',
+        'accept-language': 'en-US,en;q=0.9',
+        'authorization' : init_data_line,
+        'cache-control': 'no-cache',
+        'content-type': 'application/json',
+        'origin': 'https://dashboard.pixelverse.xyz',
+        'pragma': 'no-cache',
+        'referer': 'https://dashboard.pixelverse.xyz/',
+        'sec-ch-ua': '"Not/A)Brand";v="8", "Chromium";v="126", "Google Chrome";v="126"',
+        'sec-ch-ua-mobile': '?0',
+        'sec-ch-ua-platform': '"Windows"',
+        'sec-fetch-dest': 'empty',
+        'sec-fetch-mode': 'cors',
+        'sec-fetch-site': 'same-site',
+        'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36'
+    }
+    response = requests.post(url, headers=headers, json={})
+    if response.status_code == 400:
+        print(f"{Fore.RED + Style.BRIGHT}Sudah Daily !{Style.RESET_ALL}")
+    else:
+        data = response.json()
+        print(f"{Fore.GREEN + Style.BRIGHT}Day {data['currentStreak']} | {data['dailyUserActions'][0]['daily_action']['name']} | {data['dailyUserActions'][0]['daily_action']['reward']}")
+
+# Call the function to perform daily check-in
+
+with open('tokens.txt', 'r') as file:
+    init_data_lines = file.readlines()
+
+for init_data_line in init_data_lines:
+        init_data_line = init_data_line.strip()   
+        get_user_info(init_data_line)
+        get_pet_list(init_data_line)
