@@ -108,15 +108,26 @@ def get_pet_list(init_data_line):
     }
     
     response = requests.get(url, headers=headers)
-    pets = response.json()
-    print(f"{Fore.WHITE + Style.BRIGHT}======[ List Pet ]======{Style.RESET_ALL}")
-    for pet in pets:
-        name = pet.get('name','Belum ada pet')
-        level = pet.get('userPet', {}).get('level', 0)
-        id_pet = pet.get('userPet', {}).get('id', 0)
-        print(f"{Fore.CYAN + Style.BRIGHT}{name} Level: {level}{Style.RESET_ALL}")
-        level_up_pet(id_pet, init_data_line)
-        select_pet(id_pet, init_data_line)
+    if response.status_code != 200:
+        print(f"{Fore.RED}Failed to fetch pet list. Status Code: {response.status_code}{Style.RESET_ALL}")
+        return
+    
+    try:
+        pets = response.json()
+        if not isinstance(pets, list):
+            print(f"{Fore.RED}Unexpected response format. Expected a list of pets.{Style.RESET_ALL}")
+            return
+        
+        print(f"{Fore.WHITE + Style.BRIGHT}======[ List Pet ]======{Style.RESET_ALL}")
+        for pet in pets:
+            name = pet.get('name', 'Belum ada pet')
+            level = pet.get('userPet', {}).get('level', 0)
+            id_pet = pet.get('userPet', {}).get('id', 0)
+            print(f"{Fore.CYAN + Style.BRIGHT}{name} Level: {level}{Style.RESET_ALL}")
+            level_up_pet(id_pet, init_data_line)
+            select_pet(id_pet, init_data_line)
+    except Exception as e:
+        print(f"{Fore.RED}Error processing pet list: {e}{Style.RESET_ALL}")
 
 def select_pet(pet_id, init_data_line):
     url = f'https://api.pixelverse.xyz/api/pets/user-pets/{pet_id}/select'
