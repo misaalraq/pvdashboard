@@ -153,4 +153,5 @@ def select_pet(pet_id, init_data_line):
         print(f"{Fore.GREEN}Pet selected!{Style.RESET_ALL}")
         daily_check_in(init_data_line)
     else:
-        print(f"{Fore.RED}Failed to select pet {pet_id}. Error: {response.json
+        print(f"{Fore.RED}Gagal memilih hewan peliharaan {pet_id}. Error: {response.json()}{Style.RESET_ALL}")
+
